@@ -46,8 +46,8 @@
 									<td>1</td>
 									<td>2</td>
 									<td>
-										<button class="btn btn-info">Edit</button>
-										<button class="btn btn-danger">Delete</button>
+										<button class="btn btn-info" onclick="editBoxer()">Edit</button>
+										<button class="btn btn-danger" onclick="removeBoxer()">Delete</button>
 									</td>
 
 								</tr>
@@ -61,8 +61,8 @@
 									<td>0</td>
 									<td>0</td>
 									<td>
-										<button class="btn btn-info">Edit</button>
-										<button class="btn btn-danger">Delete</button>
+										<button class="btn btn-info" onclick="editBoxer()">Edit</button>
+										<button class="btn btn-danger" onclick="removeBoxer()">Delete</button>
 									</td>
 								</tr>
 								<tr>
@@ -75,8 +75,8 @@
 									<td>5</td>
 									<td>1</td>
 									<td>
-										<button class="btn btn-info">Edit</button>
-										<button class="btn btn-danger">Delete</button>
+										<button class="btn btn-info" onclick="editBoxer()">Edit</button>
+										<button class="btn btn-danger" onclick="removeBoxer()">Delete</button>
 									</td>
 								</tr>
 							</tbody>
@@ -84,9 +84,12 @@
 					</div>
 				</div>
 				<div id ='addWrapper'>
-					<button class="btn btn-success"><b>+</b>Add</button>
+					<button class="btn btn-success" onclick="addBoxer()"><b>+</b>Add</button>
 				</div>
 			</div>
 		</div>
+
+
+		<script src = 'boxerScripts.js'></script>
 	</body>
 </html>

@@ -2,7 +2,7 @@
 
 function addBoxer() {
 	console.log('added boxer');
-
+}
 
 function removeBoxer() {
 	console.log('removed boxer');
