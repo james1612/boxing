@@ -17,14 +17,21 @@
 //     return formDataObj;
 // }
 
-function formToObject(form) {
-    const formDataObj = {};
-    for (let element of form.elements) {
-        if (element.id) {
-			formDataObj[element.id] = element.value;
-        }
-	}
-    return formDataObj;
+// last week without if statment
+// function formToObject(form) {
+//     const formDataObj = {};
+//     for (let element of form.elements) {
+// 			formDataObj[element.id] = element.value;
+// 	}
+//     return formDataObj;
+//}
+
+// from stackoverflow
+function formToObject(formData) {
+	var object = {};
+	formData.forEach((value, key) => {object[key] = value});
+	var json = JSON.stringify(object);
+	return json;
 }
 
 
