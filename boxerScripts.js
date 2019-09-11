@@ -1,14 +1,14 @@
 const dummydata = {
-	"id": 1,
-	"firstName": "Caneloooooooooooooooooblahahhahaa",
-	"lastName": "Alvarez",
+	"id": 135,
+	"firstName": "Caneloooooooo",
+	"lastName": "Alvarezz",
 	"age": 235,
 	"nationality": "Mexico"
 };
 
-const dummyJsonListData = [{"id":33,"firstName":"James","lastName":"Irish","age":25,"nationality":"U.K."},
-{"id":65,"firstName":"Caneloooooooooooooooooblahahhahaa","lastName":"Alvarez","age":235,"nationality":"Mexico"},
-{"id":66,"firstName":"cunt","lastName":"cunt","age":12323,"nationality":"Mexico"}]
+const dummyJsonListData = [{ "id": 33, "firstName": "James", "lastName": "Irish", "age": 25, "nationality": "U.K." },
+{ "id": 65, "firstName": "Caneloooooooo", "lastName": "Alvarez", "age": 235, "nationality": "Mexico" },
+{ "id": 66, "firstName": "cunt", "lastName": "cunt", "age": 12323, "nationality": "Mexico" }]
 
 function httpRequest(method, url, callback, headers, body) {
 	request = new XMLHttpRequest();
@@ -22,6 +22,51 @@ function httpRequest(method, url, callback, headers, body) {
 	body ? request.send(body) : request.send();
 }
 
+// ONLY FOR EDIT / DELETE SO FAR
+function createButton(id, action) {
+	let buttonTemplate = document.createElement('button');
+	buttonTemplate.innerText = action;
+	buttonTemplate.setAttribute("onclick", `${action.toLowerCase()}Boxer("${id}")`);
+
+	if (action === "Edit") {
+		buttonTemplate.className = 'btn btn-info';
+	}
+	if (action === "Delete") {
+		buttonTemplate.className = 'btn btn-danger';
+	}
+	return buttonTemplate;
+}
+
+function createEditButton(id) {
+	let button = document.createElement('button');
+	button.innerText = action;
+	button.setAttribute("onclick", "createform()");
+
+	if (action === "Edit") {
+		button.className = 'btn btn-info';
+	}
+	if (action === "Delete") {
+		button.className = 'btn btn-danger';
+	}
+	return button;
+}
+
+
+function createImage() {
+	let avatar = document.createElement('img');
+	avatar.id = 'avatar'
+	avatar.setAttribute("src", "https://media.gettyimages.com/photos/canelo-alvarez-celebrates-after-his-majoritydecision-win-over-gennady-picture-id1033990304?s=612x612");
+	avatar.style.borderRadius = "50%";
+	avatar.style.width = "50px";
+	avatar.style.height = "50px";
+
+
+	let returnedTd = document.createElement('td');
+	returnedTd.appendChild(avatar);
+	return returnedTd;
+}
+
+
 function jsonToTableEntry(jsonData) {
 	let mytr = document.createElement('tr');
 	for (element in jsonData) {
@@ -29,24 +74,31 @@ function jsonToTableEntry(jsonData) {
 		mytd.innerText = jsonData[element];
 		mytr.appendChild(mytd);
 	}
-	let cell = document.createElement('td');
-	let button = document.createElement('button');
-	button.innerText = 'Delete';
-	button.setAttribute("onclick", `deleteBoxer("${jsonData.id}")`);
-	button.className = 'btn btn-danger';
-	cell.appendChild(button);
-	mytr.appendChild(cell);
+
+
+	let buttontd = document.createElement('td');
+
+	editButton = createButton(jsonData.id, "Edit");
+	deleteButton = createButton(jsonData.id, "Delete");
+
+	buttontd.appendChild(editButton);
+	buttontd.appendChild(deleteButton);
+
+
+
+	mytr.appendChild(buttontd)
+	mytr.appendChild(createImage());
+
 	return mytr;
 }
 
-console.log(jsonToTableEntry(dummydata));
 
 function createNewTable(request) {
 	let jsonDataList = JSON.parse(request.response);
 	let returned = document.getElementById("returned");
-	if(returned) {
+	if (returned) {
 		document.getElementById('mainTable').removeChild(returned);
-	} 	
+	}
 	returned = document.createElement('tbody');
 	returned.setAttribute("id", "returned");
 	for (let i = 0; i < jsonDataList.length; i++) {
@@ -67,6 +119,7 @@ function displayBoxers() {
 	httpRequest(method, url, callback, headers, body);
 }
 
+//CHANGE TOO ON PAGE LOAD
 displayBoxers()
 
 function postBoxer(event) {
@@ -106,76 +159,56 @@ function deleteBoxer(id) {
 }
 
 
-
-
-
-// function formToObject(form) {
-//     const formDataObj = {};
-//     for (let element of form.elements) {
-//         if (element.id) {
-// 			formDataObj[element.id] = element.value;
-//         }
-// 	}
-//     return formDataObj;
-// }
-
-// function formToObject(form) {
-// 	const formDataObj = {};
-// 	for (let element of form.elements) {
-// 		if (element.id) {
-// 			formDataObj[element.id] = element.value;
-// 		}
-// 	}
-// 	return formDataObj;
-// }
-
-
-// function postBoxer(form) {
-// 	data = formToObject(form);
-// 	console.log(data);
-// 	return new Promise((resolve, reject) => {
-// 		const xhr = new XMLHttpRequest();
-// 		xhr.onload = () => {
-// 			if (xhr.status == 200) {
-// 				resolve(xhr.response);
-// 			}
-// 			else {
-// 				reject('Request failed!');
-// 			}
-// 		}
-// 		xhr.open('POST', 'http://localhost:9000/boxers');
-// 		xhr.setRequestHeader("content-type", "application/json");
-// 		xhr.send(data);
-// 	});
-// }
-
-
-
-
-
-// function removeBoxer(id) {
-// 	return new Promise((resolve, reject) => {
-// 		const xhr = new XMLHttpRequest();
-// 		xhr.onload = () => {
-// 			if (xhr.status == 200) {
-// 				resolve(xhr.response);
-// 			}
-// 			else {
-// 				reject('Request failed!');
-// 			}
-// 		}
-// 		xhr.open('DELETE', `http://localhost:9000/boxers/${id}`);
-// 		xhr.setRequestHeader("content-type", "application/json");
-// 		xhr.send();
-// 	});
-// }
-
-// removeBoxer(1);
-
-// removeBoxer(2);
-
-
-function editBoxer() {
-	console.log('edited boxer');
+function editBoxer(event, id) {
+	let myForm = createForm();
+	document.getElementsByTagName('body')[0].appendChild(myForm);
+	let method = "PUT";
+	let url = "http://localhost:9000/boxers/";
+	let callback = displayBoxers;
+	let headers = {
+		"Content-Type": "application/json"
+	}
+	tempObject = JSON.parse(formToObject(event.target));
+	Object.assign(tempObject, {id : id});
+	console.log(tempObject);
+	let body = JSON.stringify(tempObject);
+	console.log(body);
+	httpRequest(method, url, callback, headers, body);
+	return false;
 }
 
+
+function createForm() {
+	var form = document.createElement("form");
+	form.setAttribute('onsubmit', "return editBoxer(event)");
+
+	var firstName = document.createElement("input"); //input element, text
+	firstName.setAttribute('type', "text");
+	firstName.setAttribute('name', "firstName");
+
+	var lastName = document.createElement("input"); //input element, text
+	lastName.setAttribute('type', "text");
+	lastName.setAttribute('name', "lastName");
+
+	var age = document.createElement("input"); //input element, text
+	age.setAttribute('type', "number");
+	age.setAttribute('name', "age");
+
+	var nationality = document.createElement("input"); //input element, text
+	nationality.setAttribute('type', "text");
+	nationality.setAttribute('name', "nationality");
+
+
+	var submit = document.createElement("input"); //input element, Submit button
+	submit.setAttribute('type', "submit");
+	submit.setAttribute('value', "Submit");
+
+	form.innerText = 'First name:';
+	form.appendChild(firstName);
+	form.appendChild(lastName);
+	form.appendChild(age);
+	form.appendChild(nationality);
+	form.appendChild(submit);
+
+	return form;
+}
