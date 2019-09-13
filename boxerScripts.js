@@ -22,64 +22,44 @@ function httpRequest(method, url, callback, headers, body) {
 	body ? request.send(body) : request.send();
 }
 
-// ONLY FOR EDIT / DELETE SO FAR
-function createButton(id, action) {
-	let buttonTemplate = document.createElement('button');
-	buttonTemplate.innerText = action;
-	buttonTemplate.setAttribute("onclick", `${action.toLowerCase()}Boxer("${id}")`);
-
-	if (action === "Edit") {
-		buttonTemplate.className = 'btn btn-info';
-	}
-	if (action === "Delete") {
-		buttonTemplate.className = 'btn btn-danger';
-	}
-	return buttonTemplate;
+function createDeleteButton(id) {
+	let button = document.createElement('button');
+	button.innerText = "Delete";
+	button.setAttribute("onclick", `deleteBoxer(${id})`);
+	button.className = 'btn btn-danger';
+	return button;
 }
 
 function createEditButton(id) {
 	let button = document.createElement('button');
-	button.innerText = action;
-	button.setAttribute("onclick", "createform()");
-
-	if (action === "Edit") {
-		button.className = 'btn btn-info';
-	}
-	if (action === "Delete") {
-		button.className = 'btn btn-danger';
-	}
+	button.innerText = "Edit";
+	button.setAttribute("onclick", `createForm(${id})`);
+	button.className = 'btn btn-info mr-1';
 	return button;
 }
 
 
-function createImage() {
-	let avatar = document.createElement('img');
-	avatar.id = 'avatar'
-	avatar.setAttribute("src", "https://media.gettyimages.com/photos/canelo-alvarez-celebrates-after-his-majoritydecision-win-over-gennady-picture-id1033990304?s=612x612");
-	avatar.style.borderRadius = "50%";
-	avatar.style.width = "50px";
-	avatar.style.height = "50px";
 
-
-	let returnedTd = document.createElement('td');
-	returnedTd.appendChild(avatar);
-	return returnedTd;
+function changeToInput(event){
+	console.log(event.target);
 }
-
 
 function jsonToTableEntry(jsonData) {
 	let mytr = document.createElement('tr');
 	for (element in jsonData) {
 		let mytd = document.createElement('td');
+		mytd.setAttribute("onclick", "changeToInput(event)")
 		mytd.innerText = jsonData[element];
 		mytr.appendChild(mytd);
 	}
 
 
 	let buttontd = document.createElement('td');
+	let buttonWrapper = document.createElement('div');
+	buttonWrapper.className = "btn-toolbar";
 
-	editButton = createButton(jsonData.id, "Edit");
-	deleteButton = createButton(jsonData.id, "Delete");
+	editButton = createEditButton(jsonData.id);
+	deleteButton = createDeleteButton(jsonData.id);
 
 	buttontd.appendChild(editButton);
 	buttontd.appendChild(deleteButton);
@@ -87,7 +67,6 @@ function jsonToTableEntry(jsonData) {
 
 
 	mytr.appendChild(buttontd)
-	mytr.appendChild(createImage());
 
 	return mytr;
 }
@@ -105,6 +84,8 @@ function createNewTable(request) {
 		returned.appendChild(jsonToTableEntry(jsonDataList[i]));
 	}
 	document.getElementById('mainTable').appendChild(returned);
+
+	$('#exampleModal').modal('hide')
 }
 
 
@@ -136,6 +117,21 @@ function postBoxer(event) {
 }
 
 
+function editBoxer(event, id) {
+	let method = "POST";
+	let url = "http://localhost:9000/boxers/";
+	let callback = displayBoxers;
+	let headers = {
+		"Content-Type": "application/json"
+	}
+	tempObject = JSON.parse(formToObject(event.target));
+	Object.assign(tempObject, {id : id});
+	let body = JSON.stringify(tempObject);
+	console.log(body);
+	httpRequest(method, url, callback, headers, body);
+	return false;
+}
+
 function formToObject(formElement) {
 	let body = {}
 	for (let input of event.target) {
@@ -159,47 +155,31 @@ function deleteBoxer(id) {
 }
 
 
-function editBoxer(event, id) {
-	let myForm = createForm();
-	document.getElementsByTagName('body')[0].appendChild(myForm);
-	let method = "PUT";
-	let url = "http://localhost:9000/boxers/";
-	let callback = displayBoxers;
-	let headers = {
-		"Content-Type": "application/json"
-	}
-	tempObject = JSON.parse(formToObject(event.target));
-	Object.assign(tempObject, {id : id});
-	console.log(tempObject);
-	let body = JSON.stringify(tempObject);
-	console.log(body);
-	httpRequest(method, url, callback, headers, body);
-	return false;
-}
 
 
-function createForm() {
+
+function createForm(id) {
 	var form = document.createElement("form");
-	form.setAttribute('onsubmit', "return editBoxer(event)");
+	form.setAttribute('onsubmit',`return editBoxer(event, ${id})`);
 
-	var firstName = document.createElement("input"); //input element, text
+	var firstName = document.createElement("input"); 
 	firstName.setAttribute('type', "text");
 	firstName.setAttribute('name', "firstName");
-
-	var lastName = document.createElement("input"); //input element, text
+	firstName.value = ('this is me ');
+	var lastName = document.createElement("input"); 
 	lastName.setAttribute('type', "text");
 	lastName.setAttribute('name', "lastName");
 
-	var age = document.createElement("input"); //input element, text
+	var age = document.createElement("input"); 
 	age.setAttribute('type', "number");
 	age.setAttribute('name', "age");
 
-	var nationality = document.createElement("input"); //input element, text
+	var nationality = document.createElement("input"); 
 	nationality.setAttribute('type', "text");
 	nationality.setAttribute('name', "nationality");
 
 
-	var submit = document.createElement("input"); //input element, Submit button
+	var submit = document.createElement("input");
 	submit.setAttribute('type', "submit");
 	submit.setAttribute('value', "Submit");
 
@@ -210,5 +190,5 @@ function createForm() {
 	form.appendChild(nationality);
 	form.appendChild(submit);
 
-	return form;
+	document.body.appendChild(form);
 }
