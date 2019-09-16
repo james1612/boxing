@@ -12,7 +12,7 @@
 <body>
 	<div id='myContainer' class='container'>
 		<div id='titleWrapper' class='navbar-brand'>
-			<h2>QA</h2>
+			<h2>BoxingApp</h2>
 		</div>
 		<nav id='navbarWrapper' class='navbar navbar-expand-lg navbar-dark bg-dark static-top'>
 			<ul class="nav navbar-nav">
@@ -53,7 +53,7 @@
   <b>+</b>Add boxer
 </button>
 
-			<!-- Modal -->
+			<!-- ADD BOXER Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -83,6 +83,38 @@
 			</div>
 		</div>
 	</div>
+
+
+
+			<!-- EDIT BOXER Modal -->
+			<div class="modal fade" id="editBoxer" tabindex="-1" role="dialog" aria-labelledby="editBoxerLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="editBoxerLabel">Edit boxer</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+						</div>
+						<div class="modal-body">
+							<div id='tempFormWrapper'>
+								<form onsubmit=`return editBoxer(event, ${id})`>
+									First name:<br>
+									<input type="text" class="form-control" name="firstName" required> <br> Last name:<br>
+									<input type="text" class="form-control" name="lastName" required><br> Age:
+									<br>
+									<input type="number" class="form-control" name="age" min="18" max="99" required><br> Nationality:
+									<br>
+									<input type="text" class="form-control" name="nationality" required><br>
+									<input type="submit" value="Submit" required class="btn btn-success btn-lg btn-block">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	 crossorigin="anonymous"></script>

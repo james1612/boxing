@@ -30,12 +30,17 @@ function createDeleteButton(id) {
 	return button;
 }
 
+
 function createEditButton(id) {
 	let button = document.createElement('button');
 	button.innerText = "Edit";
 	button.setAttribute("onclick", `createForm(${id})`);
 	button.className = 'btn btn-info mr-1';
 	return button;
+}
+
+function fireEditModal(id) {
+	
 }
 
 
