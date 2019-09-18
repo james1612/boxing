@@ -34,21 +34,15 @@ function createDeleteButton(id) {
 function createEditButton(id) {
 	let button = document.createElement('button');
 	button.innerText = "Edit";
-	button.setAttribute("onclick", `createForm(${id})`);
+	// button.setAttribute("onclick", `createForm(${id})`);
+	button.setAttribute("onclick", "$('#editBoxer').modal('show');");
+	document.getElementById('editForm').setAttribute('onsubmit', `editBoxer(event, ${id})`)
 	button.className = 'btn btn-info mr-1';
 	return button;
 }
 
-function fireEditModal(id) {
-
-}
 
 
-
-
-function changeToInput(event){
-	console.log(event.target);
-}
 
 function jsonToTableEntry(jsonData) {
 	let mytr = document.createElement('tr');

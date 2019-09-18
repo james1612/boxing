@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Home</title>
+	<title>Boxers</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	 crossorigin="anonymous">
 </head>
@@ -98,7 +98,7 @@
 						</div>
 						<div class="modal-body">
 							<div id='tempFormWrapper'>
-								<form onsubmit=`return editBoxer(event, ${id})`>
+								<form id = 'editForm' onsubmit=`return editBoxer(event, ${id})`>
 									First name:<br>
 									<input type="text" class="form-control" name="firstName" required> <br> Last name:<br>
 									<input type="text" class="form-control" name="lastName" required><br> Age:
