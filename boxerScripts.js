@@ -10,6 +10,7 @@ const dummyJsonListData = [{ "id": 33, "firstName": "James", "lastName": "Irish"
 { "id": 65, "firstName": "Caneloooooooo", "lastName": "Alvarez", "age": 235, "nationality": "Mexico" },
 { "id": 66, "firstName": "cunt", "lastName": "cunt", "age": 12323, "nationality": "Mexico" }]
 
+
 function httpRequest(method, url, callback, headers, body) {
 	request = new XMLHttpRequest();
 	request.open(method, url);
@@ -31,12 +32,22 @@ function createDeleteButton(id) {
 }
 
 
-function createEditButton(id) {
+function createEditButton(boxer) {
 	let button = document.createElement('button');
 	button.innerText = "Edit";
 	// button.setAttribute("onclick", `createForm(${id})`);
-	button.setAttribute("onclick", "$('#editBoxer').modal('show');");
-	document.getElementById('editForm').setAttribute('onsubmit', `editBoxer(event, ${id})`)
+	// button.setAttribute("onclick", "$('#editBoxer').modal('show');");
+	button.addEventListener('click', () => {
+		const formEl = document.getElementById('editForm');
+		formEl.boxer = boxer;
+		for (const key in boxer) {
+			if (key && formEl.children[key]) {
+				formEl.children[key].value = boxer[key];
+			}
+		};
+		$('#editBoxer').modal('show');
+	});
+	// document.getElementById('editForm').setAttribute('onsubmit', `editBoxer(event, ${id})`)
 	button.className = 'btn btn-info mr-1';
 	return button;
 }
@@ -58,7 +69,7 @@ function jsonToTableEntry(jsonData) {
 	let buttonWrapper = document.createElement('div');
 	buttonWrapper.className = "btn-toolbar";
 
-	editButton = createEditButton(jsonData.id);
+	editButton = createEditButton(jsonData);
 	deleteButton = createDeleteButton(jsonData.id);
 
 	buttontd.appendChild(editButton);
@@ -117,18 +128,22 @@ function postBoxer(event) {
 }
 
 
-function editBoxer(event, id) {
+function editBoxer({ boxer, children }) {
+	// debugger;
 	let method = "POST";
 	let url = "http://localhost:9000/boxers/";
-	let callback = displayBoxers;
-	let headers = {
-		"Content-Type": "application/json"
+	let callback = () => {
+		$('#editBoxer').modal('hide');
+		displayBoxers();
+	};
+	let headers = { "Content-Type": "application/json" };
+	for (const key in boxer) {
+		if (key && children[key]) {
+			boxer[key] = children[key].value;
+		}
 	}
-	tempObject = JSON.parse(formToObject(event.target));
-	Object.assign(tempObject, {id : id});
-	let body = JSON.stringify(tempObject);
-	console.log(body);
-	httpRequest(method, url, callback, headers, body);
+
+	httpRequest(method, url, callback, headers, JSON.stringify(boxer));
 	return false;
 }
 
@@ -160,21 +175,21 @@ function deleteBoxer(id) {
 
 function createForm(id) {
 	var form = document.createElement("form");
-	form.setAttribute('onsubmit',`return editBoxer(event, ${id})`);
+	form.setAttribute('onsubmit', `return editBoxer(event, ${id})`);
 
-	var firstName = document.createElement("input"); 
+	var firstName = document.createElement("input");
 	firstName.setAttribute('type', "text");
 	firstName.setAttribute('name', "firstName");
 	firstName.value = ('this is me ');
-	var lastName = document.createElement("input"); 
+	var lastName = document.createElement("input");
 	lastName.setAttribute('type', "text");
 	lastName.setAttribute('name', "lastName");
 
-	var age = document.createElement("input"); 
+	var age = document.createElement("input");
 	age.setAttribute('type', "number");
 	age.setAttribute('name', "age");
 
-	var nationality = document.createElement("input"); 
+	var nationality = document.createElement("input");
 	nationality.setAttribute('type', "text");
 	nationality.setAttribute('name', "nationality");
 
