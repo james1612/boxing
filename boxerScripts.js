@@ -1,16 +1,3 @@
-const dummydata = {
-	"id": 135,
-	"firstName": "Caneloooooooo",
-	"lastName": "Alvarezz",
-	"age": 235,
-	"nationality": "Mexico"
-};
-
-const dummyJsonListData = [{ "id": 33, "firstName": "James", "lastName": "Irish", "age": 25, "nationality": "U.K." },
-{ "id": 65, "firstName": "Caneloooooooo", "lastName": "Alvarez", "age": 235, "nationality": "Mexico" },
-{ "id": 66, "firstName": "cunt", "lastName": "cunt", "age": 12323, "nationality": "Mexico" }]
-
-
 function httpRequest(method, url, callback, headers, body) {
 	request = new XMLHttpRequest();
 	request.open(method, url);
