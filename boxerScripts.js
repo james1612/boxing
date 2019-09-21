@@ -32,7 +32,7 @@ function createEditButton(boxer) {
 				formEl.children[key].value = boxer[key];
 			}
 		};
-		$('#editBoxer').modal('show');
+		$("#editBoxer").modal("show");
 	});
 	// document.getElementById('editForm').setAttribute('onsubmit', `editBoxer(event, ${id})`)
 	button.className = 'btn btn-info mr-1';
@@ -45,19 +45,19 @@ function createEditButton(boxer) {
 function jsonToTableEntry(jsonData) {
 	let mytr = document.createElement('tr');
 	for (element in jsonData) {
-		let mytd = document.createElement('td');
-		mytd.setAttribute("onclick", "changeToInput(event)")
+		let mytd = document.createElement("td");
+		mytd.setAttribute("onclick", "changeToInput(event)");
 		mytd.innerText = jsonData[element];
 		mytr.appendChild(mytd);
 	}
 
 
 	let buttontd = document.createElement('td');
-	let buttonWrapper = document.createElement('div');
+	let buttonWrapper = document.createElement("div");
 	buttonWrapper.className = "btn-toolbar";
 
-	editButton = createEditButton(jsonData);
-	deleteButton = createDeleteButton(jsonData.id);
+	let editButton = createEditButton(jsonData);
+	let deleteButton = createDeleteButton(jsonData.id);
 
 	buttontd.appendChild(editButton);
 	buttontd.appendChild(deleteButton);
@@ -101,6 +101,18 @@ function displayBoxers() {
 //CHANGE TOO ON PAGE LOAD
 displayBoxers()
 
+
+function formToObject(formElement) {
+	let body = {};
+	for (let input of event.target) {
+		if (input.name) { // dont include the submit button
+			body[input.name] = input.value;
+			input.value = "";
+		}
+	}
+	return JSON.stringify(body);
+}
+
 function postBoxer(event) {
 	// let data = formToObject(event.target);
 	let method = 'POST';
@@ -134,16 +146,7 @@ function editBoxer({ boxer, children }) {
 	return false;
 }
 
-function formToObject(formElement) {
-	let body = {}
-	for (let input of event.target) {
-		if (input.name) { // dont include the submit button
-			body[input.name] = input.value;
-			input.value = "";
-		}
-	}
-	return JSON.stringify(body);
-}
+
 
 
 function deleteBoxer(id) {
