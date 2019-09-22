@@ -29,7 +29,7 @@ displayEvents()
 
 function postEvent(event) {
 	// let data = formToObject(event.target);
-	let method = 'POST';
+	let method = "POST";
 	let url = 'http://localhost:9000/events';
 	let body = formToObject(event.target);
 	let callback = displayEvents;
@@ -44,7 +44,7 @@ function createNewTable(request) {
 	let jsonDataList = JSON.parse(request.response);
 	let returned = document.getElementById("returned");
 	if (returned) {
-		document.getElementById('mainTable').removeChild(returned);
+		document.getElementById("mainTable").removeChild(returned);
 	}
 	returned = document.createElement('tbody');
 	returned.setAttribute("id", "returned");
@@ -53,7 +53,7 @@ function createNewTable(request) {
 	}
 	document.getElementById('mainTable').appendChild(returned);
 
-	$('#exampleModal').modal('hide')
+	$("#exampleModal").modal('hide')
 }
 
 
@@ -70,21 +70,21 @@ function formToObject(formElement) {
 }
 
 function jsonToTableEntry(jsonData) {
-	let mytr = document.createElement('tr');
+	let mytr = document.createElement("tr");
 	for (element in jsonData) {
-		let mytd = document.createElement('td');
+		let mytd = document.createElement("td");
 		mytd.setAttribute("onclick", "changeToInput(event)")
 		mytd.innerText = jsonData[element];
 		mytr.appendChild(mytd);
 	}
 
 
-	let buttontd = document.createElement('td');
-	let buttonWrapper = document.createElement('div');
+	let buttontd = document.createElement("td");
+	let buttonWrapper = document.createElement("div");
 	buttonWrapper.className = "btn-toolbar";
 
-	editButton = createEditButton(jsonData.id);
-	deleteButton = createDeleteButton(jsonData.id);
+	let editButton = createEditButton(jsonData.id);
+	let deleteButton = createDeleteButton(jsonData.id);
 
 	buttontd.appendChild(editButton);
 	buttontd.appendChild(deleteButton);
@@ -119,8 +119,8 @@ function editEdit(event, id) {
 	let callback = displayEvents;
 	let headers = {
 		"Content-Type": "application/json"
-	}
-	tempObject = JSON.parse(formToObject(event.target));
+	};
+	let tempObject = JSON.parse(formToObject(event.target));
 	Object.assign(tempObject, {id : id});
 	let body = JSON.stringify(tempObject);
 	console.log(body);
@@ -134,7 +134,7 @@ function deleteEvent(id) {
 	let callback = displayEvents;
 	let headers = {
 		"Content-Type": "application/json"
-	}
+	};
 	httpRequest(method, url, callback, headers);
 }
 

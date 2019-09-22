@@ -35,7 +35,7 @@ function createEditButton(boxer) {
 		$("#editBoxer").modal("show");
 	});
 	// document.getElementById('editForm').setAttribute('onsubmit', `editBoxer(event, ${id})`)
-	button.className = 'btn btn-info mr-1';
+	button.className = "btn btn-info mr-1";
 	return button;
 }
 
@@ -76,12 +76,12 @@ function createNewTable(request) {
 	if (returned) {
 		document.getElementById('mainTable').removeChild(returned);
 	}
-	returned = document.createElement('tbody');
+	returned = document.createElement("tbody");
 	returned.setAttribute("id", "returned");
 	for (let i = 0; i < jsonDataList.length; i++) {
 		returned.appendChild(jsonToTableEntry(jsonDataList[i]));
 	}
-	document.getElementById('mainTable').appendChild(returned);
+	document.getElementById("mainTable").appendChild(returned);
 
 	$('#exampleModal').modal('hide')
 }
@@ -165,7 +165,7 @@ function deleteBoxer(id) {
 
 function createForm(id) {
 	var form = document.createElement("form");
-	form.setAttribute('onsubmit', `return editBoxer(event, ${id})`);
+	form.setAttribute("onsubmit", `return editBoxer(event, ${id})`);
 
 	var firstName = document.createElement("input");
 	firstName.setAttribute('type', "text");
@@ -173,7 +173,7 @@ function createForm(id) {
 	firstName.value = ('this is me ');
 	var lastName = document.createElement("input");
 	lastName.setAttribute('type', "text");
-	lastName.setAttribute('name', "lastName");
+	lastName.setAttribute("name", "lastName");
 
 	var age = document.createElement("input");
 	age.setAttribute('type', "number");
