@@ -11,7 +11,7 @@ function httpRequest(method, url, callback, headers, body) {
 }
 
 function createDeleteButton(id) {
-	let button = document.createElement('button');
+	let button = document.createElement("button");
 	button.innerText = "Delete";
 	button.setAttribute("onclick", `deleteBoxer(${id})`);
 	button.className = 'btn btn-danger';
@@ -20,12 +20,12 @@ function createDeleteButton(id) {
 
 
 function createEditButton(boxer) {
-	let button = document.createElement('button');
+	let button = document.createElement("button");
 	button.innerText = "Edit";
 	// button.setAttribute("onclick", `createForm(${id})`);
 	// button.setAttribute("onclick", "$('#editBoxer').modal('show');");
 	button.addEventListener('click', () => {
-		const formEl = document.getElementById('editForm');
+		const formEl = document.getElementById("editForm");
 		formEl.boxer = boxer;
 		for (const key in boxer) {
 			if (key && formEl.children[key]) {
@@ -94,12 +94,12 @@ function displayBoxers() {
 	let callback = createNewTable;
 	let headers = {
 		"Content-Type": "application/json"
-	}
+	};
 	httpRequest(method, url, callback, headers, body);
 }
 
 //CHANGE TOO ON PAGE LOAD
-displayBoxers()
+displayBoxers();
 
 
 function formToObject(formElement) {
@@ -123,7 +123,7 @@ function postBoxer(event) {
 		"Content-Type": "application/json"
 	}
 	httpRequest(method, url, callback, headers, body);
-	return false
+	return false;
 }
 
 
