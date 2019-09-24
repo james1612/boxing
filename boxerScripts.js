@@ -87,7 +87,7 @@ function createNewTable(request) {
 
 function displayBoxers() {
 	let method = "GET";
-	let url = 'http://http://34.89.62.82:9000/boxers';
+	let url = 'http://34.89.62.82:9000/boxers';
 	body = null;
 	let callback = createNewTable;
 	let headers = {
