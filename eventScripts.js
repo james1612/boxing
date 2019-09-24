@@ -83,7 +83,7 @@ function jsonToTableEntry(jsonData) {
 	let buttonWrapper = document.createElement("div");
 	buttonWrapper.className = "btn-toolbar";
 
-	let editButton = createEditButton(jsonData.id);
+	let editButton = createEditButton(jsonData);
 	let deleteButton = createDeleteButton(jsonData.id);
 
 	buttontd.appendChild(editButton);
@@ -105,28 +105,85 @@ function createDeleteButton(id) {
 }
 
 
-function createEditButton(id) {
-	let button = document.createElement('button');
+// function createEditButton(id) {
+// 	let button = document.createElement('button');
+// 	button.innerText = "Edit";
+// 	button.setAttribute("onclick", `createForm(${id})`);
+// 	button.className = 'btn btn-info mr-1';
+// 	return button;
+// }
+
+
+function createEditButton(event) {
+	let button = document.createElement("button");
 	button.innerText = "Edit";
-	button.setAttribute("onclick", `createForm(${id})`);
-	button.className = 'btn btn-info mr-1';
+	button.addEventListener('click', () => {
+		const formEl = document.getElementById("editForm");
+		formEl.event = event;
+		for (const key in event) {
+			if (key && formEl.children[key]) {
+				formEl.children[key].value = event[key];
+			}
+		};
+		$("#editEvent").modal("show");
+	});
+	button.className = "btn btn-info mr-1";
 	return button;
 }
+// function createEditButton(boxer) {
+// 	let button = document.createElement("button");
+// 	button.innerText = "Edit";
+// 	button.addEventListener('click', () => {
+// 		const formEl = document.getElementById("editForm");
+// 		formEl.boxer = boxer;
+// 		for (const key in boxer) {
+// 			if (key && formEl.children[key]) {
+// 				formEl.children[key].value = boxer[key];
+// 			}
+// 		};
+// 		$("#editBoxer").modal("show");
+// 	});
+// 	button.className = "btn btn-info mr-1";
+// 	return button;
+// }
 
-function editEdit(event, id) {
+
+
+
+// function editEvent(event, id) {
+// 	let method = "POST";
+// 	let url = "http://localhost:9000/events/";
+// 	let callback = displayEvents;
+// 	let headers = {
+// 		"Content-Type": "application/json"
+// 	};
+// 	let tempObject = JSON.parse(formToObject(event.target));
+// 	Object.assign(tempObject, {id : id});
+// 	let body = JSON.stringify(tempObject);
+// 	console.log(body);
+// 	httpRequest(method, url, callback, headers, body);
+// 	return false;
+// }
+
+
+function editEvent({ event, children }) {
 	let method = "POST";
 	let url = "http://localhost:9000/events/";
-	let callback = displayEvents;
-	let headers = {
-		"Content-Type": "application/json"
+	let callback = () => {
+		$('#editEvent').modal('hide');
+		displayEvents();
 	};
-	let tempObject = JSON.parse(formToObject(event.target));
-	Object.assign(tempObject, {id : id});
-	let body = JSON.stringify(tempObject);
-	console.log(body);
-	httpRequest(method, url, callback, headers, body);
+	let headers = { "Content-Type": "application/json" };
+	for (const key in event) {
+		if (key && children[key]) {
+			event[key] = children[key].value;
+		}
+	}
+
+	httpRequest(method, url, callback, headers, JSON.stringify(event));
 	return false;
 }
+
 
 function deleteEvent(id) {
 	let method = "DELETE";

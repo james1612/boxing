@@ -19,11 +19,10 @@ function createDeleteButton(id) {
 }
 
 
+
 function createEditButton(boxer) {
 	let button = document.createElement("button");
 	button.innerText = "Edit";
-	// button.setAttribute("onclick", `createForm(${id})`);
-	// button.setAttribute("onclick", "$('#editBoxer').modal('show');");
 	button.addEventListener('click', () => {
 		const formEl = document.getElementById("editForm");
 		formEl.boxer = boxer;
@@ -34,7 +33,6 @@ function createEditButton(boxer) {
 		};
 		$("#editBoxer").modal("show");
 	});
-	// document.getElementById('editForm').setAttribute('onsubmit', `editBoxer(event, ${id})`)
 	button.className = "btn btn-info mr-1";
 	return button;
 }
@@ -53,8 +51,8 @@ function jsonToTableEntry(jsonData) {
 
 
 	let buttontd = document.createElement('td');
-	let buttonWrapper = document.createElement("div");
-	buttonWrapper.className = "btn-toolbar";
+	// let buttonWrapper = document.createElement("div");
+	// buttonWrapper.className = "btn-toolbar";
 
 	let editButton = createEditButton(jsonData);
 	let deleteButton = createDeleteButton(jsonData.id);
@@ -128,7 +126,6 @@ function postBoxer(event) {
 
 
 function editBoxer({ boxer, children }) {
-	// debugger;
 	let method = "POST";
 	let url = "http://localhost:9000/boxers/";
 	let callback = () => {
