@@ -14,7 +14,7 @@ function httpRequest(method, url, callback, headers, body) {
 
 function displayEvents() {
 	let method = "GET";
-	let url = 'http://localhost:9000/events';
+	let url = 'http://34.89.62.82:9000/events';
 	body = null;
 	let callback = createNewTable;
 	let headers = {
@@ -30,7 +30,7 @@ displayEvents()
 function postEvent(event) {
 	// let data = formToObject(event.target);
 	let method = "POST";
-	let url = 'http://localhost:9000/events';
+	let url = 'http://34.89.62.82:9000/events';
 	let body = formToObject(event.target);
 	let callback = displayEvents;
 	let headers = {
@@ -168,7 +168,7 @@ function createEditButton(event) {
 
 function editEvent({ event, children }) {
 	let method = "POST";
-	let url = "http://localhost:9000/events/";
+	let url = "http://34.89.62.82:9000/events/";
 	let callback = () => {
 		$('#editEvent').modal('hide');
 		displayEvents();
@@ -187,7 +187,7 @@ function editEvent({ event, children }) {
 
 function deleteEvent(id) {
 	let method = "DELETE";
-	let url = `http://localhost:9000/events/${id}`;
+	let url = `http://34.89.62.82:9000/events/${id}`;
 	let callback = displayEvents;
 	let headers = {
 		"Content-Type": "application/json"
