@@ -87,7 +87,7 @@ function createNewTable(request) {
 
 function displayBoxers() {
 	let method = "GET";
-	let url = 'http://34.89.62.82:9000/boxers';
+	let url = 'http://35.246.122.192:9000/boxers';
 	body = null;
 	let callback = createNewTable;
 	let headers = {
@@ -114,7 +114,7 @@ function formToObject(formElement) {
 function postBoxer(event) {
 	// let data = formToObject(event.target);
 	let method = 'POST';
-	let url = 'http://34.89.62.82:9000/boxers';
+	let url = 'http://35.246.122.192:9000/boxers';
 	let body = formToObject(event.target);
 	let callback = displayBoxers;
 	let headers = {
@@ -127,7 +127,7 @@ function postBoxer(event) {
 
 function editBoxer({ boxer, children }) {
 	let method = "POST";
-	let url = "http://34.89.62.82:9000/boxers/";
+	let url = "http://35.246.122.192:9000/boxers/";
 	let callback = () => {
 		$('#editBoxer').modal('hide');
 		displayBoxers();
@@ -148,7 +148,7 @@ function editBoxer({ boxer, children }) {
 
 function deleteBoxer(id) {
 	let method = "DELETE";
-	let url = `http://34.89.62.82:9000/boxers/${id}`;
+	let url = `http://35.246.122.192:9000/boxers/${id}`;
 	let callback = displayBoxers;
 	let headers = {
 		"Content-Type": "application/json"
