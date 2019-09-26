@@ -41,7 +41,7 @@ function createEditButton(boxer) {
 
 
 function jsonToTableEntry(jsonData) {
-	let mytr = document.createElement('tr');
+	let mytr = document.createElement("tr");
 	for (element in jsonData) {
 		let mytd = document.createElement("td");
 		mytd.setAttribute("onclick", "changeToInput(event)");
@@ -88,7 +88,7 @@ function createNewTable(request) {
 function displayBoxers() {
 	let method = "GET";
 	let url = 'http://35.246.122.192:9000/boxers';
-	body = null;
+	let body = null;
 	let callback = createNewTable;
 	let headers = {
 		"Content-Type": "application/json"
@@ -113,7 +113,7 @@ function formToObject(formElement) {
 
 function postBoxer(event) {
 	// let data = formToObject(event.target);
-	let method = 'POST';
+	let method = "POST";
 	let url = 'http://35.246.122.192:9000/boxers';
 	let body = formToObject(event.target);
 	let callback = displayBoxers;

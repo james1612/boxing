@@ -30,7 +30,7 @@ displayEvents()
 function postEvent(event) {
 	// let data = formToObject(event.target);
 	let method = "POST";
-	let url = 'http://35.246.122.192:9000/events';
+	let url = "http://35.246.122.192:9000/events";
 	let body = formToObject(event.target);
 	let callback = displayEvents;
 	let headers = {
@@ -53,13 +53,13 @@ function createNewTable(request) {
 	}
 	document.getElementById('mainTable').appendChild(returned);
 
-	$("#exampleModal").modal('hide')
+	$("#exampleModal").modal("hide")
 }
 
 
 
 function formToObject(formElement) {
-	let body = {}
+	let body = {};
 	for (let input of event.target) {
 		if (input.name) { // dont include the submit button
 			body[input.name] = input.value;
