@@ -12,6 +12,76 @@ function httpRequest(method, url, callback, headers, body) {
 	body ? request.send(body) : request.send();
 }
 
+function createDeleteButton(id) {
+	let button = document.createElement("button");
+	button.innerText = "Delete";
+	button.setAttribute("onclick", `deleteEvent(${id})`);
+	button.className = "btn btn-danger";
+	return button;
+}
+
+function createEditButton(event) {
+	let button = document.createElement("button");
+	button.innerText = "Edit";
+	button.addEventListener('click', () => {
+		const formEl = document.getElementById("editForm");
+		formEl.event = event;
+		for (const key in event) {
+			if (key && formEl.children[key]) {
+				formEl.children[key].value = event[key];
+			}
+		}
+		$("#editEvent").modal("show");
+	});
+	button.className = "btn btn-info mr-1";
+	return button;
+}
+
+
+function jsonToTableEntry(jsonData) {
+	let mytr = document.createElement("tr");
+	for (let element in jsonData) {
+		let mytd = document.createElement("td");
+		mytd.setAttribute("onclick", "changeToInput(event)");
+		mytd.innerText = jsonData[element];
+		mytr.appendChild(mytd);
+	}
+
+
+	let buttontd = document.createElement("td");
+	let buttonWrapper = document.createElement("div");
+	buttonWrapper.className = "btn-toolbar";
+
+	let editButton = createEditButton(jsonData);
+	let deleteButton = createDeleteButton(jsonData.id);
+
+	buttontd.appendChild(editButton);
+	buttontd.appendChild(deleteButton);
+
+
+
+	mytr.appendChild(buttontd);
+
+	return mytr;
+}
+
+function createNewTable(request) {
+	let jsonDataList = JSON.parse(request.response);
+	let returned = document.getElementById("returned");
+	if (returned) {
+		document.getElementById("mainTable").removeChild(returned);
+	}
+	returned = document.createElement("tbody");
+	returned.setAttribute("id", "returned");
+	for (let i = 0; i < jsonDataList.length; i++) {
+		returned.appendChild(jsonToTableEntry(jsonDataList[i]));
+	}
+	document.getElementById("mainTable").appendChild(returned);
+
+	$("#exampleModal").modal("hide");
+}
+
+
 function displayEvents() {
 	let method = "GET";
 	let url = "http://35.246.122.192:9000/events";
@@ -40,21 +110,6 @@ function postEvent(event) {
 	return false;
 }
 
-function createNewTable(request) {
-	let jsonDataList = JSON.parse(request.response);
-	let returned = document.getElementById("returned");
-	if (returned) {
-		document.getElementById("mainTable").removeChild(returned);
-	}
-	returned = document.createElement("tbody");
-	returned.setAttribute("id", "returned");
-	for (let i = 0; i < jsonDataList.length; i++) {
-		returned.appendChild(jsonToTableEntry(jsonDataList[i]));
-	}
-	document.getElementById("mainTable").appendChild(returned);
-
-	$("#exampleModal").modal("hide");
-}
 
 
 
@@ -68,64 +123,6 @@ function formToObject(formElement) {
 	}
 	return JSON.stringify(body);
 }
-
-function jsonToTableEntry(jsonData) {
-	let mytr = document.createElement("tr");
-	for (let element in jsonData) {
-		let mytd = document.createElement("td");
-		mytd.setAttribute("onclick", "changeToInput(event)")
-		mytd.innerText = jsonData[element];
-		mytr.appendChild(mytd);
-	}
-
-
-	let buttontd = document.createElement("td");
-	let buttonWrapper = document.createElement("div");
-	buttonWrapper.className = "btn-toolbar";
-
-	let editButton = createEditButton(jsonData);
-	let deleteButton = createDeleteButton(jsonData.id);
-
-	buttontd.appendChild(editButton);
-	buttontd.appendChild(deleteButton);
-
-
-
-	mytr.appendChild(buttontd);
-
-	return mytr;
-}
-
-function createDeleteButton(id) {
-	let button = document.createElement("button");
-	button.innerText = "Delete";
-	button.setAttribute("onclick", `deleteEvent(${id})`);
-	button.className = 'btn btn-danger';
-	return button;
-}
-
-
-
-
-
-function createEditButton(event) {
-	let button = document.createElement("button");
-	button.innerText = "Edit";
-	button.addEventListener('click', () => {
-		const formEl = document.getElementById("editForm");
-		formEl.event = event;
-		for (const key in event) {
-			if (key && formEl.children[key]) {
-				formEl.children[key].value = event[key];
-			}
-		}
-		$("#editEvent").modal("show");
-	});
-	button.className = "btn btn-info mr-1";
-	return button;
-}
-
-
 
 function editEvent({ event, children }) {
 	let method = "POST";

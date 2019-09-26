@@ -62,7 +62,7 @@ function jsonToTableEntry(jsonData) {
 
 
 
-	mytr.appendChild(buttontd)
+	mytr.appendChild(buttontd);
 
 	return mytr;
 }
@@ -72,7 +72,7 @@ function createNewTable(request) {
 	let jsonDataList = JSON.parse(request.response);
 	let returned = document.getElementById("returned");
 	if (returned) {
-		document.getElementById('mainTable').removeChild(returned);
+		document.getElementById("mainTable").removeChild(returned);
 	}
 	returned = document.createElement("tbody");
 	returned.setAttribute("id", "returned");
@@ -81,13 +81,13 @@ function createNewTable(request) {
 	}
 	document.getElementById("mainTable").appendChild(returned);
 
-	$('#exampleModal').modal("hide");
+	$("#exampleModal").modal("hide");
 }
 
 
 function displayBoxers() {
 	let method = "GET";
-	let url = 'http://35.246.122.192:9000/boxers';
+	let url = "http://35.246.122.192:9000/boxers";
 	let body = null;
 	let callback = createNewTable;
 	let headers = {
@@ -119,7 +119,7 @@ function postBoxer(event) {
 	let callback = displayBoxers;
 	let headers = {
 		"Content-Type": "application/json"
-	}
+	};
 	httpRequest(method, url, callback, headers, body);
 	return false;
 }
