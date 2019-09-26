@@ -105,13 +105,7 @@ function createDeleteButton(id) {
 }
 
 
-// function createEditButton(id) {
-// 	let button = document.createElement('button');
-// 	button.innerText = "Edit";
-// 	button.setAttribute("onclick", `createForm(${id})`);
-// 	button.className = 'btn btn-info mr-1';
-// 	return button;
-// }
+
 
 
 function createEditButton(event) {
@@ -130,40 +124,7 @@ function createEditButton(event) {
 	button.className = "btn btn-info mr-1";
 	return button;
 }
-// function createEditButton(boxer) {
-// 	let button = document.createElement("button");
-// 	button.innerText = "Edit";
-// 	button.addEventListener('click', () => {
-// 		const formEl = document.getElementById("editForm");
-// 		formEl.boxer = boxer;
-// 		for (const key in boxer) {
-// 			if (key && formEl.children[key]) {
-// 				formEl.children[key].value = boxer[key];
-// 			}
-// 		};
-// 		$("#editBoxer").modal("show");
-// 	});
-// 	button.className = "btn btn-info mr-1";
-// 	return button;
-// }
 
-
-
-
-// function editEvent(event, id) {
-// 	let method = "POST";
-// 	let url = "http://localhost:9000/events/";
-// 	let callback = displayEvents;
-// 	let headers = {
-// 		"Content-Type": "application/json"
-// 	};
-// 	let tempObject = JSON.parse(formToObject(event.target));
-// 	Object.assign(tempObject, {id : id});
-// 	let body = JSON.stringify(tempObject);
-// 	console.log(body);
-// 	httpRequest(method, url, callback, headers, body);
-// 	return false;
-// }
 
 
 function editEvent({ event, children }) {
@@ -195,37 +156,3 @@ function deleteEvent(id) {
 	httpRequest(method, url, callback, headers);
 }
 
-function createForm(id) {
-	var form = document.createElement("form");
-	form.setAttribute('onsubmit',`return editEvent(event, ${id})`);
-
-	var firstName = document.createElement("input"); 
-	firstName.setAttribute('type', "text");
-	firstName.setAttribute('name', "firstName");
-	firstName.value = ('this is me ');
-	var lastName = document.createElement("input"); 
-	lastName.setAttribute('type', "text");
-	lastName.setAttribute('name', "lastName");
-
-	var age = document.createElement("input"); 
-	age.setAttribute('type', "number");
-	age.setAttribute('name', "age");
-
-	var nationality = document.createElement("input"); 
-	nationality.setAttribute('type', "text");
-	nationality.setAttribute('name', "nationality");
-
-
-	var submit = document.createElement("input");
-	submit.setAttribute('type', "submit");
-	submit.setAttribute('value', "Submit");
-
-	form.innerText = 'First name:';
-	form.appendChild(firstName);
-	form.appendChild(lastName);
-	form.appendChild(age);
-	form.appendChild(nationality);
-	form.appendChild(submit);
-
-	document.body.appendChild(form);
-}
