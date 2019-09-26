@@ -49,7 +49,7 @@
 			</div> -->
 
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+			<button id = "addButton" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
 				<b>+</b>Add boxer
 			</button>
 
@@ -68,15 +68,15 @@
 							<div id='tempFormWrapper'>
 								<form onsubmit="return postBoxer(event)">
 									First name:<br>
-									<input type="text" class="form-control" name="firstName" required> <br> Last
+									<input id = "firstName" type="text" class="form-control" name="firstName" required> <br> Last
 									name:<br>
-									<input type="text" class="form-control" name="lastName" required><br> Age:
+									<input id = "lastName" type="text" class="form-control" name="lastName" required><br> Age:
 									<br>
-									<input type="number" class="form-control" name="age" min="18" max="99" required><br>
+									<input id = "age" type="number" class="form-control" name="age" min="18" max="99" required><br>
 									Nationality:
 									<br>
-									<input type="text" class="form-control" name="nationality" required><br>
-									<input type="submit" value="Submit" required
+									<input id = "nationality" type="text" class="form-control" name="nationality" required><br>
+									<input id = "modalSubmit" type="submit" value="Submit" required
 										class="btn btn-success btn-lg btn-block">
 								</form>
 							</div>
