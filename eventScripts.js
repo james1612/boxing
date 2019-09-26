@@ -14,8 +14,8 @@ function httpRequest(method, url, callback, headers, body) {
 
 function displayEvents() {
 	let method = "GET";
-	let url = 'http://35.246.122.192:9000/events';
-	body = null;
+	let url = "http://35.246.122.192:9000/events";
+	let body = null;
 	let callback = createNewTable;
 	let headers = {
 		"Content-Type": "application/json"
@@ -24,7 +24,7 @@ function displayEvents() {
 }
 
 //CHANGE TOO ON PAGE LOAD
-displayEvents()
+displayEvents();
 
 
 function postEvent(event) {
@@ -35,9 +35,9 @@ function postEvent(event) {
 	let callback = displayEvents;
 	let headers = {
 		"Content-Type": "application/json"
-	}
+	};
 	httpRequest(method, url, callback, headers, body);
-	return false
+	return false;
 }
 
 function createNewTable(request) {
@@ -46,14 +46,14 @@ function createNewTable(request) {
 	if (returned) {
 		document.getElementById("mainTable").removeChild(returned);
 	}
-	returned = document.createElement('tbody');
+	returned = document.createElement("tbody");
 	returned.setAttribute("id", "returned");
 	for (let i = 0; i < jsonDataList.length; i++) {
 		returned.appendChild(jsonToTableEntry(jsonDataList[i]));
 	}
-	document.getElementById('mainTable').appendChild(returned);
+	document.getElementById("mainTable").appendChild(returned);
 
-	$("#exampleModal").modal("hide")
+	$("#exampleModal").modal("hide");
 }
 
 
@@ -71,7 +71,7 @@ function formToObject(formElement) {
 
 function jsonToTableEntry(jsonData) {
 	let mytr = document.createElement("tr");
-	for (element in jsonData) {
+	for (let element in jsonData) {
 		let mytd = document.createElement("td");
 		mytd.setAttribute("onclick", "changeToInput(event)")
 		mytd.innerText = jsonData[element];
@@ -91,13 +91,13 @@ function jsonToTableEntry(jsonData) {
 
 
 
-	mytr.appendChild(buttontd)
+	mytr.appendChild(buttontd);
 
 	return mytr;
 }
 
 function createDeleteButton(id) {
-	let button = document.createElement('button');
+	let button = document.createElement("button");
 	button.innerText = "Delete";
 	button.setAttribute("onclick", `deleteEvent(${id})`);
 	button.className = 'btn btn-danger';
@@ -118,7 +118,7 @@ function createEditButton(event) {
 			if (key && formEl.children[key]) {
 				formEl.children[key].value = event[key];
 			}
-		};
+		}
 		$("#editEvent").modal("show");
 	});
 	button.className = "btn btn-info mr-1";
@@ -131,7 +131,7 @@ function editEvent({ event, children }) {
 	let method = "POST";
 	let url = "http://35.246.122.192:9000/events/";
 	let callback = () => {
-		$('#editEvent').modal('hide');
+		$("#editEvent").modal("hide");
 		displayEvents();
 	};
 	let headers = { "Content-Type": "application/json" };

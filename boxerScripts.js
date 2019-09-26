@@ -14,7 +14,7 @@ function createDeleteButton(id) {
 	let button = document.createElement("button");
 	button.innerText = "Delete";
 	button.setAttribute("onclick", `deleteBoxer(${id})`);
-	button.className = 'btn btn-danger';
+	button.className = "btn btn-danger";
 	return button;
 }
 
@@ -23,14 +23,14 @@ function createDeleteButton(id) {
 function createEditButton(boxer) {
 	let button = document.createElement("button");
 	button.innerText = "Edit";
-	button.addEventListener('click', () => {
+	button.addEventListener("click", () => {
 		const formEl = document.getElementById("editForm");
 		formEl.boxer = boxer;
 		for (const key in boxer) {
 			if (key && formEl.children[key]) {
 				formEl.children[key].value = boxer[key];
 			}
-		};
+		}
 		$("#editBoxer").modal("show");
 	});
 	button.className = "btn btn-info mr-1";
@@ -42,7 +42,7 @@ function createEditButton(boxer) {
 
 function jsonToTableEntry(jsonData) {
 	let mytr = document.createElement("tr");
-	for (element in jsonData) {
+	for (let element in jsonData) {
 		let mytd = document.createElement("td");
 		mytd.setAttribute("onclick", "changeToInput(event)");
 		mytd.innerText = jsonData[element];
@@ -50,7 +50,7 @@ function jsonToTableEntry(jsonData) {
 	}
 
 
-	let buttontd = document.createElement('td');
+	let buttontd = document.createElement("td");
 	// let buttonWrapper = document.createElement("div");
 	// buttonWrapper.className = "btn-toolbar";
 
@@ -81,7 +81,7 @@ function createNewTable(request) {
 	}
 	document.getElementById("mainTable").appendChild(returned);
 
-	$('#exampleModal').modal('hide')
+	$('#exampleModal').modal("hide");
 }
 
 
@@ -114,7 +114,7 @@ function formToObject(formElement) {
 function postBoxer(event) {
 	// let data = formToObject(event.target);
 	let method = "POST";
-	let url = 'http://35.246.122.192:9000/boxers';
+	let url = "http://35.246.122.192:9000/boxers";
 	let body = formToObject(event.target);
 	let callback = displayBoxers;
 	let headers = {
@@ -129,7 +129,7 @@ function editBoxer({ boxer, children }) {
 	let method = "POST";
 	let url = "http://35.246.122.192:9000/boxers/";
 	let callback = () => {
-		$('#editBoxer').modal('hide');
+		$("#editBoxer").modal("hide");
 		displayBoxers();
 	};
 	let headers = { "Content-Type": "application/json" };
@@ -152,7 +152,7 @@ function deleteBoxer(id) {
 	let callback = displayBoxers;
 	let headers = {
 		"Content-Type": "application/json"
-	}
+	};
 	httpRequest(method, url, callback, headers);
 }
 
