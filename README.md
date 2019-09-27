@@ -65,5 +65,14 @@ To test the Spring backend of the application, Junit tests were used to test eac
 ![Alt text](https://github.com/james1612/boxing/blob/master/Readmepictures/codecy.PNG)
 
 
+## Future of project 
+
+Short term:
+Get Docker working.
+Add searches / sorts / filters.
+Make design look less ‘Bootstrapy’ / generic.
+Long term:
+Make tables relational.
+Add more tables, e.g. divisions, multiple fights on the same event
 
 
