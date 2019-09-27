@@ -37,7 +37,7 @@ I decided to create a webapp that can be used to store boxers and their details,
 
 ## Deployment
 
-(https://github.com/james1612/boxing/blob/master/Readmepictures/CI%20pipeline.PNG)
+![Alt text](https://github.com/james1612/boxing/blob/master/Readmepictures/CI%20pipeline.PNG)
 
 ### Technologies Used
 
