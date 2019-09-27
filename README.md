@@ -32,7 +32,7 @@ I decided to create a webapp that can be used to store boxers and their details,
 
 ## Design 
 
-(https://github.com/james1612/boxing/blob/master/Readmepictures/BoxersFE.PNG)
+![Alt text](https://github.com/james1612/boxing/blob/master/Readmepictures/BoxersFE.PNG)
 
 
 ## Deployment
@@ -58,11 +58,11 @@ For the backend API JUnit tests were carried out making sure as much of the code
 
 To test the Spring backend of the application, Junit tests were used to test each part separately. The Mockito library was used in conjunction with this.  Mockito is used to mock interfaces so that a dummy functionality can be added to a mock interface that can be used in unit testing. The website Codacy.com was used throughout to make sure the code written was of a high standard.
 
-(https://github.com/james1612/boxing/blob/master/Readmepictures/Boxercontrollertests.PNG)
+![Alt text](https://github.com/james1612/boxing/blob/master/Readmepictures/Boxercontrollertests.PNG)
 
-(https://github.com/james1612/boxing/blob/master/Readmepictures/eventscontrollertests.PNG)
+![Alt text](https://github.com/james1612/boxing/blob/master/Readmepictures/eventscontrollertests.PNG)
 
-(https://github.com/james1612/boxing/blob/master/Readmepictures/codecy.PNG)
+![Alt text](https://github.com/james1612/boxing/blob/master/Readmepictures/codecy.PNG)
 
 
 
